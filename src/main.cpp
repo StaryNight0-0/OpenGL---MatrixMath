@@ -1,6 +1,6 @@
-#include <project/main.hpp>
 
 #include <iostream>
+#include <SDL/SDL2.H>
 #include <cstdlib>
 
 int main(int argc, char* argv[]) {
