@@ -1,4 +1,0 @@
-/home/starrynightdan/GIT/Caboodle/Build/CMakeFiles/Render.dir
-/home/starrynightdan/GIT/Caboodle/Build/CMakeFiles/Caboodle.dir
-/home/starrynightdan/GIT/Caboodle/Build/CMakeFiles/edit_cache.dir
-/home/starrynightdan/GIT/Caboodle/Build/CMakeFiles/rebuild_cache.dir
