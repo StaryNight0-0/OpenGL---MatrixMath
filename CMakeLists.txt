@@ -14,11 +14,11 @@ find_package(Vulkan REQUIRED)
 # ---------------------------------------------------------------
 
 add_library(Vulkan STATIC
-
+src/Vulkan/VkEngine.cpp
 )
 
-target_include_directories(Render PUBLIC src)
-target_link_libraries(Render PRIVATE SDL2::SDL2)
+target_include_directories(Vulkan PUBLIC src)
+target_link_libraries(Vulkan PRIVATE SDL2::SDL2)
 
 # -----------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ add_executable(${PROJECT_NAME} src/Caboodle/Caboodle.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 
-     Render
+     Vulkan
      SDL2::SDL2  
      Vulkan::Vulkan)
 
