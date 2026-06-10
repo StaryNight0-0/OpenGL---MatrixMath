@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <glad/glad.h>
 #include <cstdlib>
 
 int screenHeight = 640;
@@ -11,6 +12,12 @@ SDL_Event event;
 
 
 bool Quit = false;
+
+
+void OpenGL(){
+	std::cout << "Vendor" << glGetString(GL_VENDOR) << std::endl;
+	std::cout << "Renderer: " << glGetString(GL_RENDERER);
+}
 
 //---------------------------------------------------------Run Function------------------------------------------------------------------
 
@@ -40,6 +47,8 @@ if(OpenGLContext == nullptr){
 		std::cout << "SDL_GL_CreateContext has failed: " << SDL_GetError();
 		exit(1);
 	}
+
+	
 
 }
 
