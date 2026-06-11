@@ -104,7 +104,7 @@ void VertexSpecification(){
 	glBufferData(GL_ARRAY_BUFFER,vertexPosition.size() * sizeof(GLfloat), vertexPosition.data(), GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glBindVertexArray(0);
 	glDisableVertexAttribArray(0);
 }
@@ -161,11 +161,20 @@ while(SDL_PollEvent(&event) != 0){
 }
 
 void PreDraw(){
+glDisable(GL_DEPTH_TEST);
+glDisable(GL_CULL_FACE);
 
+glViewport(0,0,screenWidth,screenHeight);
+glClearColor(1.f,1.f,0.f,1.f);
+
+glUseProgram(gPipelineShader);
 }
 
 void Draw(){
+glBindVertexArray(gVertexArray);
+glBindBuffer(GL_ARRAY_BUFFER, gVertexBuffer);
 
+glDrawArrays(GL_TRIANGLES,0,3);
 }
 
 
