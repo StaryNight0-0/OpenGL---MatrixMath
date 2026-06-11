@@ -1,0 +1,6 @@
+/home/starrynightdan/GIT/Caboodle/Build/CMakeFiles/Caboodle.dir
+/home/starrynightdan/GIT/Caboodle/Build/CMakeFiles/edit_cache.dir
+/home/starrynightdan/GIT/Caboodle/Build/CMakeFiles/rebuild_cache.dir
+/home/starrynightdan/GIT/Caboodle/Build/OpenGL/glad/CMakeFiles/glad.dir
+/home/starrynightdan/GIT/Caboodle/Build/OpenGL/glad/CMakeFiles/edit_cache.dir
+/home/starrynightdan/GIT/Caboodle/Build/OpenGL/glad/CMakeFiles/rebuild_cache.dir

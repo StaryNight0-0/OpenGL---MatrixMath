@@ -3,13 +3,15 @@
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
 #include <cstdlib>
+#include <vector>
 
 int screenHeight = 640;
 int screenWidth = 480;
 SDL_Window* window = nullptr;
 SDL_GLContext OpenGLContext = nullptr;
 SDL_Event event;
-
+GLuint gVertexArray = 0;
+GLuint gVertexBuffer = 0;
 
 bool Quit = false;
 
@@ -18,6 +20,40 @@ void OpenGL(){
 	std::cout << "Vendor" << glGetString(GL_VENDOR) << std::endl;
 	std::cout << "Renderer: " << glGetString(GL_RENDERER);
 }
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+void VertexSpecification(){
+
+	const std::vector<GLfloat> vertexPosition{
+
+		-0.8f,-0.8f,0.0f, //Vertex 1
+		0.8f, -0.8f,0.0f, //Vertex 2
+		0.0f, 0.8f, 0.0f  //Vertex 3
+	};
+        
+	
+	glGenVertexArrays(1,&gVertexArray);
+	glBindVertexArray(gVertexArray);
+
+	glGenBuffers(1,&gVertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, gVertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER,vertexPosition.size() * sizeof(GLfloat), vertexPosition.data(), GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glBindVertexArray(0);
+	glDisableVertexAttribArray(0);
+}
+
+
+
+
+
+
 
 //---------------------------------------------------------Run Function------------------------------------------------------------------
 
@@ -97,6 +133,8 @@ int main(int argc, char* argv[]) {
 
 
 Run();
+VertexSpecification();
+CreateGraphicsPipeline();
 Loop();
 Cleanup();
 
