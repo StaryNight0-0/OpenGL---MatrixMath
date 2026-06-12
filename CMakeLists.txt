@@ -13,6 +13,14 @@ find_package(SDL2 REQUIRED CONFIG REQUIRED COMPONENTS SDL2)
 
 # ---------------------------------------------------------------
 
+add_library(main STATIC
+         src/Project/Window.cpp
+         src/Project/MainLoop.cpp
+)
+
+target_include_directories(main PUBLIC src)
+target_link_libraries(main PRIVATE SDL2::SDL2  PRIVATE glad)
+
 
 
 
@@ -28,12 +36,14 @@ find_package(SDL2 REQUIRED CONFIG REQUIRED COMPONENTS SDL2)
 add_executable(${PROJECT_NAME} src/Caboodle/Caboodle.cpp)
 
 add_subdirectory(OpenGL/glad)
-target_link_libraries(${PROJECT_NAME} PRIVATE glad)
+
 
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-     SDL2::SDL2  
+     SDL2::SDL2
+     glad
+     main
      )
 
 
