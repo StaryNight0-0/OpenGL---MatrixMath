@@ -49,24 +49,36 @@ void Shaders::VertexSpec(){
 
 	const std::vector<GLfloat> vertexPosition{
 
-		-0.8f,-0.8f,0.0f, //Vertex 1
-		0.8f, -0.8f,0.0f, //Vertex 2
-		0.0f, 0.8f, 0.0f  //Vertex 3
+		0.5f, 0.5f,0.0f, //top right
+		0.5f, -0.5f,0.0f, //bottom right
+	        -0.5f, -0.5f, 0.0f, //bottom left
+		-0.5f, 0.5f, 0.0f   // top left
+		
+	};
+
+	const std::vector<GLuint> indices{
+		0, 1, 3,
+		1, 2, 3
 	};
         
 	
+
 	glGenVertexArrays(1,&gVertexArray);
+        glGenBuffers(1, &gVertexBuffer);
+	glGenBuffers(1,&gElementVertexBuffer);
+
 	glBindVertexArray(gVertexArray);
 
-	glGenBuffers(1,&gVertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, gVertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER,sizeof(vertexPosition), vertexPosition.data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER,gVertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER,vertexPosition.size() * sizeof(GL_FLOAT), vertexPosition.data(), GL_STATIC_DRAW);
 
-	
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gElementVertexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+
 	glBindVertexArray(0);
-	glDisableVertexAttribArray(0);
 }
 
 

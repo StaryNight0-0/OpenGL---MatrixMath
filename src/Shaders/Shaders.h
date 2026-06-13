@@ -9,6 +9,7 @@ public:
 GLuint gVertexArray = 0;
 GLuint gPipelineShader = 0;
 GLuint gVertexBuffer = 0;
+GLuint gElementVertexBuffer = 0;
 
 
 const std::string gVertexShaderSource = 

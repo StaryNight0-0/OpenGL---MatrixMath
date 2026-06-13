@@ -22,9 +22,9 @@ glUseProgram(shader.gPipelineShader);
 void MainLoop::draw(){
 
 glBindVertexArray(shader.gVertexArray);
-glBindBuffer(GL_ARRAY_BUFFER, shader.gVertexBuffer);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shader.gElementVertexBuffer);
+glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
 
-glDrawArrays(GL_TRIANGLES,0,3);
 
 
 }
@@ -34,8 +34,10 @@ glDrawArrays(GL_TRIANGLES,0,3);
 void MainLoop::loop(){
 
         win.init();
-	shader.VertexSpec();
+	shader.OpenGLInfo();
 	shader.CreateGraphicsPipeline();
+	shader.VertexSpec();
+	
 	
 
 	while(!quit){
