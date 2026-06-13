@@ -23,7 +23,7 @@ SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 
 
-window = SDL_CreateWindow("Caboodle",0,0,screenHeight,screenWidth,SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+window = SDL_CreateWindow("Caboodle",0,0,screenHeight,screenWidth,SDL_WINDOW_OPENGL);
 if(window == nullptr ){
 		std::cout << "SDL_CreateWindow has failed: " << SDL_GetError();
 		exit(1);

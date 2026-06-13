@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "Window.h"
+#include "Shaders/Shaders.h"
 
 
 class MainLoop{
@@ -18,5 +19,6 @@ void draw();
 void Input();
 
 Window win;
+Shaders shader;
 
 };

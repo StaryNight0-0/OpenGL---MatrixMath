@@ -33,7 +33,6 @@ glAttachShader(Object, myVertexShader);
 glAttachShader(Object, myFragmentShader);
 glLinkProgram(Object);
 glValidateProgram(Object);
-glUseProgram(Object);
 glDeleteShader(myVertexShader);
 glDeleteShader(myFragmentShader);
 
