@@ -22,10 +22,10 @@ target_include_directories(main PUBLIC src)
 target_link_libraries(main PRIVATE SDL2::SDL2  PRIVATE glad)
 
 
-add_library(shaders STATIC
-         src/Shaders/Shaders.cpp)
-target_include_directories(shaders PUBLIC src)
-target_link_libraries(shaders PRIVATE SDL2::SDL2 PRIVATE glad)
+add_library(graphics STATIC
+         src/Graphics/Shaders.cpp)
+target_include_directories(graphics PUBLIC src)
+target_link_libraries(graphics PRIVATE SDL2::SDL2 PRIVATE glad)
 
 
 
@@ -47,7 +47,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
      SDL2::SDL2
      glad
      main
-     shaders
+     graphics
      )
 
 

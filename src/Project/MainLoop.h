@@ -2,7 +2,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "Window.h"
-#include "Shaders/Shaders.h"
+#include "Graphics/Shaders.h"
 
 
 class MainLoop{
