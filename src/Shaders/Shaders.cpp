@@ -5,20 +5,40 @@
 #include <string>
 #include <fstream>
 
+#define GLCheck(x) clearError(); x; checkError();
 
+void Shaders::clearError(){
+
+	while(glGetError() != GL_NO_ERROR){
+
+
+	}
+}
+
+bool Shaders::checkError(){
+
+ while(GLenum error = glGetError()){
+		std::cout << "OpenGL Error" << error << std::endl;
+		return true;  // Returns true if there is an error
+	}
+return false;
+}
 
 std::string Shaders::LoadShader(const std::string& filename){
-
 	std::string result = "";
 	std::string line = "";
 	std::ifstream File(filename.c_str());
+	
 
 	if(File.is_open()){
-		while(std::getline(File, line)){
+		std::cout << "file is open" << std::endl;    // THIS FUNCTION DOESNT WORK AT THE MOMENT SO SHADERS DONT LOAD NEEDS FIXING 
+		while(std::getline(File, line)){             // NEED TO SORT OUT CMAKE SO THAT IT RECOGNISES THE STRING AS A FILE
 			result += line + '\n';
 		}
 		File.close();
 	}
+	std::cout << result << std::endl;
+
 return result;
 }
 
@@ -41,13 +61,12 @@ GLint shaderCompiled = GL_FALSE;
 glGetShaderiv(shaderObject, GL_COMPILE_STATUS, &shaderCompiled);
 
 	if(shaderCompiled != GL_TRUE){
-		std::cout << "Unable to complile shader: " << shaderObject << src << std::endl;
-		//printShaderLog(shaderObject);
+		std::cout << "\nUnable to complile shader: \n" << shaderObject << std::endl; // check if the shader has been compiled
 		glDeleteShader(shaderObject);
 		shaderObject = 0;
 	}
 	else{
-		std::cout << "Unable to open file: " << src << std::endl;
+		std::cout << "Unable to open file: " << src << std::endl; // Checks if the file has been openend or not
 	}	
 
 return shaderObject;
@@ -72,6 +91,8 @@ return Object;
 
 void Shaders::CreateGraphicsPipeline(){
 
+std::string vertexShaderSource = LoadShader("./Vert.glsl");
+std::string fragmentShaderSource = LoadShader("./Frag.glsl");
 
 PipelineShader = CreateShader(vertexShaderSource, fragmentShaderSource);
 
