@@ -11,18 +11,18 @@ void MainLoop::preDraw(){
 glDisable(GL_DEPTH_TEST);
 glDisable(GL_CULL_FACE);
 
-glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-glUseProgram(shader.gPipelineShader);
+glUseProgram(shader.PipelineShader);
 
 }
 
 
 void MainLoop::draw(){
 
-glBindVertexArray(shader.gVertexArray);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shader.gElementVertexBuffer);
+glBindVertexArray(shader.VertexArray);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shader.ElementVertexBuffer);
 glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
 
 
@@ -35,8 +35,9 @@ void MainLoop::loop(){
 
         win.init();
 	shader.OpenGLInfo();
-	shader.CreateGraphicsPipeline();
 	shader.VertexSpec();
+	shader.CreateGraphicsPipeline();
+	
 	
 	
 

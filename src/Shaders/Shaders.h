@@ -1,35 +1,23 @@
 #pragma once
 #include <iostream>
 #include <glad/glad.h>
+#include <string>
 
 class Shaders{
 
 public:
 
-GLuint gVertexArray = 0;
-GLuint gPipelineShader = 0;
-GLuint gVertexBuffer = 0;
-GLuint gElementVertexBuffer = 0;
+std::string vertexShaderSource = LoadShader("./Shaders/Vert.glsl");
+std::string fragmentShaderSource = LoadShader("./Shaders/Frag.glsl");	
+
+GLuint VertexArray = 0;
+GLuint PipelineShader = 0;
+GLuint VertexBuffer = 0;
+GLuint ElementVertexBuffer = 0;
 
 
-const std::string gVertexShaderSource = 
-	"#version 330 core\n"
-	"layout(location = 0) in vec3 position;\n"
-	"void main()\n"
-	"{\n"
-	"   gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-	"}\n";
-                                                                                       //Some hardcoded shaders to test OpenGL
 
-const std::string gFragmentShaderSource = 
-	"#version 410 core\n"
-	"out vec4 color;\n"
-	"void main()\n"
-	"{\n"
-	"  color = vec4(1.0f, 0.5f, 0.0f, 1.0f);\n"
-	"}\n";
-
-
+std::string LoadShader(const std::string& filename);
 GLuint compileShader(GLuint type, const std::string &source);
 GLuint CreateShader(const std::string& VertexShader, const std::string& FragmentShader);
 void CreateGraphicsPipeline();
