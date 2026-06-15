@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 
+
 #define GLCheck(x) clearError(); x; checkError();
 
 void Shaders::clearError(){
@@ -28,7 +29,8 @@ std::string Shaders::LoadShader(const std::string& filename){
 	std::string result = "";
 	std::string line = "";
 	std::ifstream File(filename.c_str());
-	
+        std::cout << "Loading shader:" << filename << "\n";
+
 
 	if(File.is_open()){
 		std::cout << "file is open" << std::endl;    // THIS FUNCTION DOESNT WORK AT THE MOMENT SO SHADERS DONT LOAD NEEDS FIXING 
@@ -48,26 +50,28 @@ GLuint shaderObject;
 
 if(type == GL_VERTEX_SHADER){
        shaderObject = glCreateShader(GL_VERTEX_SHADER);
+		std::cout << "Vertex shader found" << std::endl;
 	}
 else if(type == GL_FRAGMENT_SHADER){
        shaderObject = glCreateShader(GL_FRAGMENT_SHADER);
+		std::cout << "Fragment Shader found" << std::endl;
 	}
 
 const char* src = source.c_str();	
 glShaderSource(shaderObject, 1, &src, NULL);
 glCompileShader(shaderObject);
 
-GLint shaderCompiled = GL_FALSE;
-glGetShaderiv(shaderObject, GL_COMPILE_STATUS, &shaderCompiled);
+//GLint shaderCompiled = GL_FALSE;
+//lGetShaderiv(shaderObject, GL_COMPILE_STATUS, &shaderCompiled);
 
-	if(shaderCompiled != GL_TRUE){
-		std::cout << "\nUnable to complile shader: \n" << shaderObject << std::endl; // check if the shader has been compiled
-		glDeleteShader(shaderObject);
-		shaderObject = 0;
-	}
-	else{
-		std::cout << "Unable to open file: " << src << std::endl; // Checks if the file has been openend or not
-	}	
+	//if(shaderCompiled != GL_TRUE){
+	//	std::cout << "\nUnable to complile shader: \n" << shaderObject << std::endl; // check if the shader has been compiled
+		//glDeleteShader(shaderObject);
+	//	shaderObject = 0;
+//	}
+//	else{
+		//std::cout << "Unable to open shader file: " << src << std::endl; // Checks if the file has been openend or not
+//	}	
 
 return shaderObject;
 }
@@ -91,8 +95,8 @@ return Object;
 
 void Shaders::CreateGraphicsPipeline(){
 
-std::string vertexShaderSource = LoadShader("./Vert.glsl");
-std::string fragmentShaderSource = LoadShader("./Frag.glsl");
+std::string vertexShaderSource = LoadShader("Graphics/Vert.glsl");
+std::string fragmentShaderSource = LoadShader("Graphics/Frag.glsl");
 
 PipelineShader = CreateShader(vertexShaderSource, fragmentShaderSource);
 

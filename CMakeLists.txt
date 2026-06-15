@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 project("Caboodle")
 
-set(CMAKE_CXX STANDARD          20)
+set(CMAKE_CXX_STANDARD          20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS        OFF)
 
@@ -49,6 +49,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
      main
      graphics
      )
+
+add_custom_command(TARGET Caboodle POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory 
+${CMAKE_SOURCE_DIR}/src/Graphics $<TARGET_FILE_DIR:Caboodle>/Graphics)
 
 
 # --------------------------------------------------------------
