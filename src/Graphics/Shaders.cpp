@@ -84,12 +84,14 @@ GLuint myVertexShader = compileShader(GL_VERTEX_SHADER, vertexShaderSource);
 GLuint myFragmentShader = compileShader(GL_FRAGMENT_SHADER,fragmentShaderSource);
 
 glAttachShader(Object, myVertexShader);
+	std::cout << "Vertex Shader Attached" << std::endl;
 glAttachShader(Object, myFragmentShader);
+	std::cout << "Fragment Shader Attached" << std::endl;
 glLinkProgram(Object);
 glValidateProgram(Object);
 glDeleteShader(myVertexShader);
 glDeleteShader(myFragmentShader);
-
+	std::cout << "Shader successfully created :) " << std::endl;
 return Object;
 }
 
