@@ -39,12 +39,14 @@ target_link_libraries(graphics PRIVATE SDL2::SDL2 PRIVATE glad)
 add_executable(${PROJECT_NAME} src/Caboodle/Caboodle.cpp)
 
 add_subdirectory(OpenGL/glad)
+add_subdirectory(OpenGL/glm-master)
 
 
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
      SDL2::SDL2
+     glm
      glad
      main
      graphics
