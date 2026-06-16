@@ -88,3 +88,4 @@
 *.docx filter=lfs diff=lfs merge=lfs -text
 
 OpenGL/glad/** linguist-vendored
+OpenGL/glm-master/** linguist-vendored
