@@ -23,9 +23,10 @@ target_link_libraries(main PRIVATE SDL2::SDL2  PRIVATE glad)
 
 
 add_library(graphics STATIC
-         src/Graphics/Shaders.cpp)
+         src/Graphics/Shaders.cpp
+         src/Graphics/Math.cpp)
 target_include_directories(graphics PUBLIC src)
-target_link_libraries(graphics PRIVATE SDL2::SDL2 PRIVATE glad)
+target_link_libraries(graphics PRIVATE SDL2::SDL2 PRIVATE glad PRIVATE glm-header-only)
 
 
 

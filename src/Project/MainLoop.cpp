@@ -6,6 +6,8 @@
 
 
 
+
+
 void MainLoop::preDraw(){
 
 glDisable(GL_DEPTH_TEST);
@@ -37,6 +39,7 @@ void MainLoop::loop(){
 	shader.OpenGLInfo();
 	shader.VertexSpec();
 	shader.CreateGraphicsPipeline();
+	mt.vector();
 	
 	
 	

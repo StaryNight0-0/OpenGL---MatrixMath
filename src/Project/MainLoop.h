@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include "Window.h"
 #include "Graphics/Shaders.h"
+#include "Graphics/Math.h"
 
 
 class MainLoop{
@@ -20,5 +21,6 @@ void Input();
 
 Window win;
 Shaders shader;
+math mt;
 
 };
