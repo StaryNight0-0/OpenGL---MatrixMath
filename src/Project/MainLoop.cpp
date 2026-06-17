@@ -17,7 +17,10 @@ glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 glUseProgram(shader.PipelineShader);
-
+GLint location = glGetUniformLocation(shader.PipelineShader,"uOffset");
+if(location >=0){
+		glUniform1f(location,uOffset);
+	}
 }
 
 
@@ -39,8 +42,7 @@ void MainLoop::loop(){
 	shader.OpenGLInfo();
 	shader.VertexSpec();
 	shader.CreateGraphicsPipeline();
-	mt.vector();
-	
+	//mt.vector();
 	
 	
 
@@ -64,4 +66,20 @@ while(SDL_PollEvent(&event) != 0){
 			quit = true;
 		}
 	}
-}
+
+	if(state[SDL_SCANCODE_ESCAPE]){
+		quit = true;
+	}
+	if(state[SDL_SCANCODE_UP]){
+              uOffset+=0.01f;
+		std::cout << "Offset: " << uOffset << std::endl;
+	}
+	if(state[SDL_SCANCODE_DOWN]){
+		uOffset-=0.01f;
+		std::cout << "Offset: " << uOffset << std::endl;
+
+	}
+
+}       
+
+

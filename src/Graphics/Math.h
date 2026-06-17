@@ -6,7 +6,7 @@
 class math {
 
 public:
-	void vector();
+	//void vector();
 
 
 };

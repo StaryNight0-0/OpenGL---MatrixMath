@@ -13,6 +13,8 @@ public:
 
 SDL_Event event;
 bool quit = false;
+float uOffset = 0.0f;
+const Uint8 *state = SDL_GetKeyboardState(NULL);
 
 void loop();
 void preDraw();
