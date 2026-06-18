@@ -17,7 +17,19 @@ glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 glUseProgram(shader.PipelineShader);
-glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,uOffset,0.0f));
+
+glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,uOffset));
+
+glm::mat4 perspective = glm::perspective(glm::radians(45.0f), (float)win.screenHeight / (float)win.screenWidth, 0.1f, 10.0f);
+GLint perspectiveLocation = glGetUniformLocation(shader.PipelineShader, "u_Perspective");
+	if(perspectiveLocation >=0){
+		glUniformMatrix4fv(perspectiveLocation, 1, GL_FALSE, &perspective[0][0]);
+	}
+	else{
+		std::cout << "Could not find perspective uniform variable" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
 GLint modelMatrixLocation = glGetUniformLocation(shader.PipelineShader,"u_ModelMatrix"); // can print this out if needed using cout
 if(modelMatrixLocation >=0){
 		glUniformMatrix4fv(modelMatrixLocation,1,GL_FALSE,&translate[0][0]);
