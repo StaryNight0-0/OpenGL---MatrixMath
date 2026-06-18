@@ -107,22 +107,42 @@ PipelineShader = CreateShader(vertexShaderSource, fragmentShaderSource);
 void Shaders::VertexSpec(){
 
 	const std::vector<GLfloat> vertexInfo{
+		-0.5f, -0.5f, 0.5f,
+		 0.5f, -0.5f, 0.5f,
+	 	 0.5f,  0.5f, 0.5f,   // FRONT FACE
+		-0.5f,  0.5f, 0.5f,
 
-		0.5f, 0.4f,0.0f,         // top left
-		1.0f, 0.0f, 0.0f,       // colour
-		0.5f, -0.5f,0.0f,      //bottom right
-		0.0f, 1.0f, 0.0f,     // colour
-	        -0.5f, -0.5f, 0.0f,  //bottom left
-		0.0f,  0.0f, 1.0f,  // colour
-		-0.5f, 0.4f, 0.0f, // top right
-		1.0f,  1.0f, 0.0f // colour
+		-0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+	 	 0.5f,  0.5f, -0.5f,   // BACK FACE
+		-0.5f,  0.5f, -0.5f,
 
-		
+		-0.5f,  0.5f, 0.5f,
+		 0.5f,  0.5f, 0.5f,
+	 	 0.5f,  0.5f,-0.5f,   // TOP FACE
+		-0.5f,  0.5f,-0.5f,
+
+		-0.5f, -0.5f, 0.5f,
+		 0.5f, -0.5f, 0.5f,
+	 	 0.5f, -0.5f,-0.5f,   // BOTTOM FACE
+		-0.5f, -0.5f,-0.5f,
+
+		 0.5f, -0.5f, 0.5f,
+		 0.5f, -0.5f,-0.5f,
+	 	 0.5f,  0.5f,-0.5f,   // RIGHT FACE
+		 0.5f,  0.5f, 0.5f,
+
+		-0.5f, -0.5f, 0.5f,
+		-0.5f, -0.5f,-0.5f,
+	 	-0.5f,  0.5f,-0.5f,   // LEFT FACE
+		-0.5f,  0.5f, 0.5f
+	
 	};
 
 	const std::vector<GLuint> indices{
-		0, 1, 3,
-		1, 2, 3
+	        0, 1, 1, 2, 2, 3, 3, 0,
+		4, 5, 5, 6, 6, 7, 7, 4,
+		0, 4, 1, 5, 2, 6, 3, 7
 	};
         
 	
@@ -140,10 +160,8 @@ void Shaders::VertexSpec(){
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ElementVertexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)0);
-	glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(sizeof(GLfloat)* 3));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
 
 	glBindVertexArray(0);
 	

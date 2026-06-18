@@ -10,17 +10,24 @@
 
 void MainLoop::preDraw(){
 
-glDisable(GL_DEPTH_TEST);
+glEnable(GL_DEPTH_TEST);
 glDisable(GL_CULL_FACE);
+//glEnable(GL_BLEND);
+glDepthFunc(GL_LESS);
+
+
+
+//glCullFace(GL_BACK)
 
 glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 glUseProgram(shader.PipelineShader);
+	
 
-glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,uOffset));
+glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(uOffsetX,0.0f,uOffsetZ));
 
-glm::mat4 perspective = glm::perspective(glm::radians(45.0f), (float)win.screenHeight / (float)win.screenWidth, 0.1f, 10.0f);
+glm::mat4 perspective = glm::perspective(glm::radians(45.0f), (float)win.screenHeight / (float)win.screenWidth, 0.1f, 100.0f);
 GLint perspectiveLocation = glGetUniformLocation(shader.PipelineShader, "u_Perspective");
 	if(perspectiveLocation >=0){
 		glUniformMatrix4fv(perspectiveLocation, 1, GL_FALSE, &perspective[0][0]);
@@ -46,7 +53,8 @@ void MainLoop::draw(){
 
 glBindVertexArray(shader.VertexArray);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shader.ElementVertexBuffer);
-glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
+glDrawElements(GL_LINES,24,GL_UNSIGNED_INT,0);
+glBindVertexArray(0);
 
 
 
@@ -88,13 +96,21 @@ while(SDL_PollEvent(&event) != 0){
 		quit = true;
 	}
 	if(state[SDL_SCANCODE_UP]){
-		uOffset += 0.01f;
-		std::cout << "Offset: " << uOffset << std::endl;
+		uOffsetZ += 0.01f;
+		std::cout << "Offset on z: " << uOffsetZ << std::endl;
 	}
 	if(state[SDL_SCANCODE_DOWN]){
-		uOffset -= 0.01f;
-		std::cout << "Offset: " << uOffset << std::endl;
+		uOffsetZ -= 0.01f;
+		std::cout << "Offset on z: " << uOffsetZ << std::endl;
 
+	}
+	if(state[SDL_SCANCODE_LEFT]){
+		uOffsetX -= 0.01f;
+		std::cout << "Offset on x: " << uOffsetX << std::endl;
+	}
+	if(state[SDL_SCANCODE_RIGHT]){
+		uOffsetX += 0.01f;
+		std::cout << "Offset on x: " << uOffsetX << std::endl;
 	}
 
 }       

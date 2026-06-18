@@ -14,7 +14,9 @@ public:
 SDL_Event event;
 bool quit = false;
 const Uint8 *state = SDL_GetKeyboardState(NULL);
-float uOffset = 0.0f;
+float uOffsetZ = 0.0f;
+float uOffsetX = 0.0f;
+
 
 void loop();
 void preDraw();
