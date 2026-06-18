@@ -10,7 +10,7 @@
 
 void MainLoop::preDraw(){
 
-glEnable(GL_DEPTH_TEST);
+glDisable(GL_DEPTH_TEST);
 glDisable(GL_CULL_FACE);
 //glEnable(GL_BLEND);
 glDepthFunc(GL_LESS);
@@ -23,11 +23,40 @@ glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 glUseProgram(shader.PipelineShader);
-	
+double currentTime = SDL_GetTicks();
+if(currentTime - lastTime >= + 1000){
+		rotation += 0.05f;
+		lastTime = currentTime;
+	}
 
-glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(uOffsetX,0.0f,uOffsetZ));
 
-glm::mat4 perspective = glm::perspective(glm::radians(45.0f), (float)win.screenHeight / (float)win.screenWidth, 0.1f, 100.0f);
+
+
+GLint modelMatrixLocation = glGetUniformLocation(shader.PipelineShader,"u_Model");
+	if(modelMatrixLocation >= 0){
+		glUniformMatrix4fv(modelMatrixLocation,1,GL_FALSE,&model[0][0]);
+	}
+	else{
+		std::cout << "Could not find model matrix" << std::endl;
+	}
+
+
+model = glm::rotate(model,glm::radians(rotation), glm::vec3(0.0f,1.0f,0.0f));
+
+
+glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(uOffsetX,0.0f,uOffsetZ));
+GLint viewMatrixLocation = glGetUniformLocation(shader.PipelineShader,"u_View"); // can print this out if needed using cout
+if(viewMatrixLocation >=0){
+		glUniformMatrix4fv(viewMatrixLocation,1,GL_FALSE,&view[0][0]);
+	}
+	else{
+		std::cout << "Could not find view matrix" << std::endl;
+		exit(EXIT_FAILURE);
+
+	}
+
+
+glm::mat4 perspective = glm::perspective(glm::radians(45.0f), (float)win.screenWidth / (float)win.screenHeight, 0.1f, 100.0f);
 GLint perspectiveLocation = glGetUniformLocation(shader.PipelineShader, "u_Perspective");
 	if(perspectiveLocation >=0){
 		glUniformMatrix4fv(perspectiveLocation, 1, GL_FALSE, &perspective[0][0]);
@@ -37,15 +66,7 @@ GLint perspectiveLocation = glGetUniformLocation(shader.PipelineShader, "u_Persp
 		exit(EXIT_FAILURE);
 	}
 
-GLint modelMatrixLocation = glGetUniformLocation(shader.PipelineShader,"u_ModelMatrix"); // can print this out if needed using cout
-if(modelMatrixLocation >=0){
-		glUniformMatrix4fv(modelMatrixLocation,1,GL_FALSE,&translate[0][0]);
-	}
-	else{
-		std::cout << "Could not find model matrix" << std::endl;
-		exit(EXIT_FAILURE);
 
-	}
 }
 
 
@@ -72,7 +93,7 @@ void MainLoop::loop(){
 	
 
 	while(!quit){
-		
+		SDL_Delay(16);
 		Input();
 		preDraw();
 		draw();

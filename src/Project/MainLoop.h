@@ -16,6 +16,11 @@ bool quit = false;
 const Uint8 *state = SDL_GetKeyboardState(NULL);
 float uOffsetZ = 0.0f;
 float uOffsetX = 0.0f;
+float rotation = 0.0f;
+float lastTime = 0;
+
+
+glm::mat4 model = glm::mat4(1.0f);
 
 
 void loop();

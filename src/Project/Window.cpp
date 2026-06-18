@@ -32,7 +32,7 @@ if(window == nullptr ){
 
 OpenGLContext = SDL_GL_CreateContext(window);
 SDL_GL_MakeCurrent(window, OpenGLContext);
-SDL_GL_SetSwapInterval(1);
+//SDL_GL_SetSwapInterval(1);
 std::cout << SDL_GetCurrentVideoDriver() << std::endl;
 if(OpenGLContext == nullptr){
 		std::cout << "SDL_GL_CreateContext has failed: " << SDL_GetError();
