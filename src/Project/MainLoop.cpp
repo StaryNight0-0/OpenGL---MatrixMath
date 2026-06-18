@@ -17,9 +17,15 @@ glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 glUseProgram(shader.PipelineShader);
-GLint location = glGetUniformLocation(shader.PipelineShader,"uOffset");
-if(location >=0){
-		glUniform1f(location,uOffset);
+glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,uOffset,0.0f));
+GLint modelMatrixLocation = glGetUniformLocation(shader.PipelineShader,"u_ModelMatrix"); // can print this out if needed using cout
+if(modelMatrixLocation >=0){
+		glUniformMatrix4fv(modelMatrixLocation,1,GL_FALSE,&translate[0][0]);
+	}
+	else{
+		std::cout << "Could not find model matrix" << std::endl;
+		exit(EXIT_FAILURE);
+
 	}
 }
 
@@ -42,7 +48,6 @@ void MainLoop::loop(){
 	shader.OpenGLInfo();
 	shader.VertexSpec();
 	shader.CreateGraphicsPipeline();
-	//mt.vector();
 	
 	
 
@@ -71,11 +76,11 @@ while(SDL_PollEvent(&event) != 0){
 		quit = true;
 	}
 	if(state[SDL_SCANCODE_UP]){
-              uOffset+=0.01f;
+		uOffset += 0.01f;
 		std::cout << "Offset: " << uOffset << std::endl;
 	}
 	if(state[SDL_SCANCODE_DOWN]){
-		uOffset-=0.01f;
+		uOffset -= 0.01f;
 		std::cout << "Offset: " << uOffset << std::endl;
 
 	}

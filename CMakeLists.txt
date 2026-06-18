@@ -19,7 +19,7 @@ add_library(main STATIC
 )
 
 target_include_directories(main PUBLIC src)
-target_link_libraries(main PRIVATE SDL2::SDL2  PRIVATE glad)
+target_link_libraries(main PRIVATE SDL2::SDL2  PRIVATE glad PRIVATE glm-header-only)
 
 
 add_library(graphics STATIC
