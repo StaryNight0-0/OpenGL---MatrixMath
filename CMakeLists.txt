@@ -19,14 +19,14 @@ add_library(main STATIC
 )
 
 target_include_directories(main PUBLIC src)
-target_link_libraries(main PRIVATE SDL2::SDL2  PRIVATE glad PRIVATE glm-header-only)
+target_link_libraries(main PRIVATE SDL2::SDL2  PRIVATE glad PRIVATE glm-header-only PRIVATE imgui)
 
 
 add_library(graphics STATIC
          src/Graphics/Shaders.cpp
          src/Graphics/Math.cpp)
 target_include_directories(graphics PUBLIC src)
-target_link_libraries(graphics PRIVATE SDL2::SDL2 PRIVATE glad PRIVATE glm-header-only)
+target_link_libraries(graphics PRIVATE SDL2::SDL2 PRIVATE glad PRIVATE glm-header-only PRIVATE imgui)
 
 
 
@@ -41,6 +41,7 @@ add_executable(${PROJECT_NAME} src/Caboodle/Caboodle.cpp)
 
 add_subdirectory(OpenGL/glad)
 add_subdirectory(OpenGL/glm-master)
+add_subdirectory(imgui/)
 
 
 target_include_directories(${PROJECT_NAME} PRIVATE src)
@@ -51,6 +52,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
      glad
      main
      graphics
+     imgui
      )
 
 add_custom_command(TARGET Caboodle POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory 

@@ -1,6 +1,9 @@
 #include <iostream>
 #include "MainLoop.h"
 #include "glad/glad.h"
+#include <imgui.h>
+#include <imgui_impl_sdl2.h>
+#include <imgui_impl_opengl3.h>
 
 
 
@@ -10,24 +13,36 @@
 
 void MainLoop::preDraw(){
 
+ImGui_ImplOpenGL3_NewFrame();
+ImGui_ImplSDL2_NewFrame();
+ImGui::NewFrame();
+
+
+static float f = 0.0f;
+ static int counter = 0;
+
+ImGui::Begin("Caboodle       ");                          // Create a window called "Hello, world!" and append into it.
+ImGui::Text("Cube go woo woo waa waa.");               // Display some text (you can use a format strings too)
+
+ImGui::SliderFloat("Speed", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+
+if (ImGui::Button("DaBaby"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+counter++;
+ImGui::SameLine();
+ImGui::Text("counter = %d", counter);
+ImGui::End();
+
+glViewport(0,0,win.screenWidth,win.screenHeight);
 glDisable(GL_DEPTH_TEST);
 glDisable(GL_CULL_FACE);
-//glEnable(GL_BLEND);
-glDepthFunc(GL_LESS);
-
-
-
-//glCullFace(GL_BACK)
-
 glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+ImGui::Render();
 glUseProgram(shader.PipelineShader);
-double currentTime = SDL_GetTicks();
-if(currentTime - lastTime >= + 1000){
-		rotation += 0.05f;
-		lastTime = currentTime;
-	}
+ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+SDL_GL_SwapWindow(win.window);
+
 
 
 
@@ -42,6 +57,11 @@ GLint modelMatrixLocation = glGetUniformLocation(shader.PipelineShader,"u_Model"
 
 
 model = glm::rotate(model,glm::radians(rotation), glm::vec3(0.0f,1.0f,0.0f));
+float currentTime = SDL_GetTicks();
+if(currentTime - lastTime >= + 1000){
+		rotation += 0.05f;
+		lastTime = currentTime;
+	}
 
 
 glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(uOffsetX,0.0f,uOffsetZ));
@@ -56,7 +76,7 @@ if(viewMatrixLocation >=0){
 	}
 
 
-glm::mat4 perspective = glm::perspective(glm::radians(45.0f), (float)win.screenWidth / (float)win.screenHeight, 0.1f, 100.0f);
+glm::mat4 perspective = glm::perspective(glm::radians(45.0f), (float)win.screenWidth / (float)win.screenHeight, 0.1f, 10.0f);
 GLint perspectiveLocation = glGetUniformLocation(shader.PipelineShader, "u_Perspective");
 	if(perspectiveLocation >=0){
 		glUniformMatrix4fv(perspectiveLocation, 1, GL_FALSE, &perspective[0][0]);
@@ -71,6 +91,7 @@ GLint perspectiveLocation = glGetUniformLocation(shader.PipelineShader, "u_Persp
 
 
 void MainLoop::draw(){
+
 
 glBindVertexArray(shader.VertexArray);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shader.ElementVertexBuffer);
