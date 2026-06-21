@@ -31,17 +31,19 @@ ImGui::SameLine();
 ImGui::Text("counter = %d", counter);
 ImGui::End();
 
+glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
 glViewport(0,0,win.screenWidth,win.screenHeight);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glDisable(GL_CULL_FACE);
-glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
 ImGui::Render();
 glUseProgram(shader.PipelineShader);
 ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-SDL_GL_SwapWindow(win.window);
 
 
 
