@@ -21,19 +21,19 @@ ImGui::NewFrame();
 static float f = 0.0f;
  static int counter = 0;
 
-ImGui::Begin("Caboodle       ");                          // Create a window called "Hello, world!" and append into it.
-ImGui::Text("Cube go woo woo waa waa.");               // Display some text (you can use a format strings too)
+ImGui::Begin("Caboodle       ");
+ImGui::Text("Cube go woo woo waa waa.");
 
-ImGui::SliderFloat("Speed", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-
-if (ImGui::Button("DaBaby"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+ImGui::SliderFloat("Speed", &f, 0.0f, 1.0f);
+if (ImGui::Button("DaBaby"))
 counter++;
 ImGui::SameLine();
 ImGui::Text("counter = %d", counter);
 ImGui::End();
 
 glViewport(0,0,win.screenWidth,win.screenHeight);
-glDisable(GL_DEPTH_TEST);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
 glDisable(GL_CULL_FACE);
 glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -95,8 +95,9 @@ void MainLoop::draw(){
 
 glBindVertexArray(shader.VertexArray);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shader.ElementVertexBuffer);
-glDrawElements(GL_LINES,24,GL_UNSIGNED_INT,0);
+glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_INT,0);
 glBindVertexArray(0);
+SDL_GL_SwapWindow(win.window);
 
 
 
@@ -118,7 +119,6 @@ void MainLoop::loop(){
 		Input();
 		preDraw();
 		draw();
-		SDL_GL_SwapWindow(win.window);
 	}
 
 	win.cleanup();

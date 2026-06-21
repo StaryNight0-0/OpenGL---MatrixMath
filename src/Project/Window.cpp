@@ -50,6 +50,7 @@ if(!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)){
 IMGUI_CHECKVERSION();
 ImGui::CreateContext();
 ImGuiIO& io = ImGui::GetIO(); (void)io;
+io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  
 ImGui::StyleColorsDark();
 
 ImGuiStyle& style = ImGui::GetStyle();
