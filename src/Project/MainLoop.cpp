@@ -17,7 +17,7 @@ void MainLoop::imgui(){
         ImGui::NewFrame();
 
 
-           static float f = 0.0f;
+           //static float f = 0.0f;
             static int counter = 0;
 
             ImGui::Begin("Caboodle", &quit, ImGuiWindowFlags_MenuBar); // Create a window called "Hello, world!" and append into it.
@@ -27,6 +27,10 @@ void MainLoop::imgui(){
                         if(ImGui::MenuItem("Set Fullscreen")){
 				win.set_fullscreen(true);
 				std::cout  << "Window is now fullscreen" << std::endl;
+			}
+			if(ImGui::MenuItem("Disable Fullscreen")){
+				win.set_fullscreen(false);
+				std::cout << "Window is now out of fullscreen" << std::endl;
 			}
 			if(ImGui::MenuItem("Exit")){
 				std::cout << "You have quit the engine" << std::endl;
@@ -39,7 +43,7 @@ void MainLoop::imgui(){
 
             ImGui::Text("Cube is big and small ");               // Display some text (you can use a format strings too)
 
-            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+            ImGui::SliderFloat("float", &rotation, 0.0f, 5.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
             if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
                 counter++;
             ImGui::SameLine();
@@ -81,11 +85,11 @@ GLint modelMatrixLocation = glGetUniformLocation(shader.PipelineShader,"u_Model"
 
 
 model = glm::rotate(model,glm::radians(rotation), glm::vec3(0.0f,1.0f,0.0f));
-float currentTime = SDL_GetTicks();
-if(currentTime - lastTime >= + 1000){
-		rotation += 0.05f;
-		lastTime = currentTime;
-	}
+//float currentTime = SDL_GetTicks();
+//if(currentTime - lastTime >= + 1000){
+		//rotation += 0.05f;
+		//lastTime = currentTime;
+//	}
 
 
 glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(uOffsetX,0.0f,uOffsetZ));

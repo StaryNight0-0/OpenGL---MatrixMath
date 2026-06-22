@@ -95,5 +95,6 @@ if(!SDL_SetWindowFullscreen(window,state)){
 		std::cout << "Could not change to fullscreen mode" << std::endl;
 		SDL_GetError();
 	}
-	fullscreen = activate;
+	fullscreen = state;
 }
+
