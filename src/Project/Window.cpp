@@ -88,3 +88,12 @@ void Window::cleanup(){
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
+
+
+void Window::set_fullscreen(bool state){
+if(!SDL_SetWindowFullscreen(window,state)){
+		std::cout << "Could not change to fullscreen mode" << std::endl;
+		SDL_GetError();
+	}
+	fullscreen = activate;
+}

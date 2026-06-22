@@ -23,6 +23,11 @@ void MainLoop::imgui(){
             ImGui::Begin("Caboodle", &quit, ImGuiWindowFlags_MenuBar); // Create a window called "Hello, world!" and append into it.
 	    if(ImGui::BeginMenuBar()){
 		if(ImGui::BeginMenu("Options")){
+
+                        if(ImGui::MenuItem("Set Fullscreen")){
+				win.set_fullscreen(true);
+				std::cout  << "Window is now fullscreen" << std::endl;
+			}
 			if(ImGui::MenuItem("Exit")){
 				std::cout << "You have quit the engine" << std::endl;
 				quit = true;
