@@ -14,8 +14,8 @@ class Window{
 
 public:
 
-GLuint screenHeight = 480;
-GLuint screenWidth = 640;
+GLuint screenHeight = 0;
+GLuint screenWidth = 0;
 SDL_Window* window = nullptr;
 SDL_GLContext OpenGLContext = nullptr;
 const char* glsl_version = "#version 330";

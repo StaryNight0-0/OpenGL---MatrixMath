@@ -9,7 +9,19 @@
 
 void Window::init(){
 
+	std::cout << "Please input a width for your window: " << std::endl;
+	std::cin >> screenWidth;
+	std::cout << "Please input a height for your window: " << std::endl;    // Asks the user to input a width and height for their window
+	std::cin >> screenHeight;
 
+	if(screenWidth > 1920){
+		std::cout << "Please choose a lower resolution" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+	else if(screenHeight > 1080){
+		std::cout << "Please choose a lower resolution" << std::endl;
+		exit(EXIT_FAILURE);
+	}
 
 if(SDL_Init(SDL_INIT_VIDEO) < 0){
 	std::cout << "Window could not be initiallized: " << SDL_GetError();
@@ -28,7 +40,7 @@ SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 float main_scale = ImGui_ImplSDL2_GetContentScaleForDisplay(0);
 
-window = SDL_CreateWindow("Caboodle",0,0,screenWidth * main_scale,screenHeight * main_scale,SDL_WINDOW_OPENGL);
+window = SDL_CreateWindow("Caboodle",0,0,screenWidth * main_scale,screenHeight * main_scale,SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE );
 if(window == nullptr ){
 		std::cout << "SDL_CreateWindow has failed: " << SDL_GetError();
 		exit(1);

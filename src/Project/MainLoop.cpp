@@ -4,32 +4,54 @@
 #include <imgui.h>
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_opengl3.h>
+#include <imgui.h>
+#include <string>
 
 
 
+void MainLoop::imgui(){
 
+        // Start the Dear ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
+
+
+           static float f = 0.0f;
+            static int counter = 0;
+
+            ImGui::Begin("Caboodle", &quit, ImGuiWindowFlags_MenuBar); // Create a window called "Hello, world!" and append into it.
+	    if(ImGui::BeginMenuBar()){
+		if(ImGui::BeginMenu("Options")){
+			if(ImGui::MenuItem("Exit")){
+				std::cout << "You have quit the engine" << std::endl;
+				quit = true;
+			}
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
+
+            ImGui::Text("Cube is big and small ");               // Display some text (you can use a format strings too)
+
+            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+            if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+                counter++;
+            ImGui::SameLine();
+            ImGui::Text("counter = %d", counter);
+
+            ImGui::End();
+
+}
 
 
 
 void MainLoop::preDraw(){
 
-ImGui_ImplOpenGL3_NewFrame();
-ImGui_ImplSDL2_NewFrame();
-ImGui::NewFrame();
 
 
-static float f = 0.0f;
- static int counter = 0;
 
-ImGui::Begin("Caboodle       ");
-ImGui::Text("Cube go woo woo waa waa.");
 
-ImGui::SliderFloat("Speed", &f, 0.0f, 1.0f);
-if (ImGui::Button("DaBaby"))
-counter++;
-ImGui::SameLine();
-ImGui::Text("counter = %d", counter);
-ImGui::End();
 
 glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -40,12 +62,7 @@ glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glDisable(GL_CULL_FACE);
 
-
-ImGui::Render();
 glUseProgram(shader.PipelineShader);
-ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-
 
 
 
@@ -99,16 +116,12 @@ glBindVertexArray(shader.VertexArray);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shader.ElementVertexBuffer);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_INT,0);
 glBindVertexArray(0);
+ImGui::Render();
+ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 SDL_GL_SwapWindow(win.window);
-
-
-
 }
 
-
-
 void MainLoop::loop(){
-
         win.init();
 	shader.OpenGLInfo();
 	shader.VertexSpec();
@@ -119,6 +132,7 @@ void MainLoop::loop(){
 	while(!quit){
 		SDL_Delay(16);
 		Input();
+		imgui();
 		preDraw();
 		draw();
 	}
@@ -130,6 +144,9 @@ void MainLoop::loop(){
 void MainLoop::Input(){
 
 while(SDL_PollEvent(&event) != 0){
+              ImGui_ImplSDL2_ProcessEvent(&event);
+
+
 		if(event.type == SDL_QUIT){
 			std::cout << "Quitting" << std::endl;
 			quit = true;
@@ -157,6 +174,11 @@ while(SDL_PollEvent(&event) != 0){
 		std::cout << "Offset on x: " << uOffsetX << std::endl;
 	}
 
-}       
+}  
+
+
+
+
+
 
 
