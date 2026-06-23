@@ -1,2 +1,3 @@
-<img width="700" height="100" alt="OpenGL_Matrix_Math" src="https://github.com/user-attachments/assets/aa0c9cc5-8c0a-4b7f-bef9-135ed0c1cf57" />
+<img width="700" height="70" alt="OpenGL_Matrix_Math(1)" src="https://github.com/user-attachments/assets/7b53dc1c-2024-467c-84cc-f9ac3d686b4b" />
+
 
