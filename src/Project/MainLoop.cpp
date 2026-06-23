@@ -20,7 +20,7 @@ void MainLoop::imgui(){
            //static float f = 0.0f;
             static int counter = 0;
 
-            ImGui::Begin("Caboodle", &quit, ImGuiWindowFlags_MenuBar); // Create a window called "Hello, world!" and append into it.
+            ImGui::Begin("Caboodle", &quit, ImGuiWindowFlags_MenuBar); 
 	    if(ImGui::BeginMenuBar()){
 		if(ImGui::BeginMenu("Options")){
 
@@ -41,10 +41,10 @@ void MainLoop::imgui(){
 		ImGui::EndMenuBar();
 	}
 
-            ImGui::Text("Cube is big and small ");               // Display some text (you can use a format strings too)
+            ImGui::Text("Cube is big and small ");               
 
-            ImGui::SliderFloat("float", &rotation, 0.0f, 5.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-            if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+            ImGui::SliderFloat("Rotation", &rotation, 0.0f, 5.0f);            
+            if (ImGui::Button("Button"))                            
                 counter++;
             ImGui::SameLine();
             ImGui::Text("counter = %d", counter);
@@ -85,14 +85,9 @@ GLint modelMatrixLocation = glGetUniformLocation(shader.PipelineShader,"u_Model"
 
 
 model = glm::rotate(model,glm::radians(rotation), glm::vec3(0.0f,1.0f,0.0f));
-//float currentTime = SDL_GetTicks();
-//if(currentTime - lastTime >= + 1000){
-		//rotation += 0.05f;
-		//lastTime = currentTime;
-//	}
 
 
-glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(uOffsetX,0.0f,uOffsetZ));
+glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(uOffsetX,0.0f,-5));
 GLint viewMatrixLocation = glGetUniformLocation(shader.PipelineShader,"u_View"); // can print this out if needed using cout
 if(viewMatrixLocation >=0){
 		glUniformMatrix4fv(viewMatrixLocation,1,GL_FALSE,&view[0][0]);
@@ -104,7 +99,7 @@ if(viewMatrixLocation >=0){
 	}
 
 
-glm::mat4 perspective = glm::perspective(glm::radians(45.0f), (float)win.screenWidth / (float)win.screenHeight, 0.1f, 10.0f);
+glm::mat4 perspective = glm::perspective(glm::radians(45.0f), (float)win.screenWidth / (float)win.screenHeight, 0.1f, 0.0f);
 GLint perspectiveLocation = glGetUniformLocation(shader.PipelineShader, "u_Perspective");
 	if(perspectiveLocation >=0){
 		glUniformMatrix4fv(perspectiveLocation, 1, GL_FALSE, &perspective[0][0]);
