@@ -18,6 +18,7 @@ Designed using NVIM and Linux , not fully tested on Windows.
 - GLM Library
 - glad
 - Dear ImGui
+- CMake
 
 
 
@@ -30,9 +31,14 @@ Designed using NVIM and Linux , not fully tested on Windows.
 3. SDL2 must be installed on your system for this to work appropiately ```(Sudo apt install libsdl2-dev)``` on Ubuntu.
 4. Then to run the application use ``` ./Caboodle ``` .
 5. The code will have comments along with is so the user is able to understand what is happening and can modify and too it if they want to.
+6. This code is built to be modified so the user can understand some more about matrices and their uses within vertex and fragment shaders. It also grants an insight into some basic OpenGL conecpts and functions.
 ## Example
   <img width="640" height="480" alt="codesnip1" src="https://github.com/user-attachments/assets/d723b971-a383-4394-bf8c-edbdd3e04e75" />
 
+## Lessons Learned
+I decided to take on this project to learn some more lower level ideas when it comes to programming. I have taken a more  proactive approach to how I organise my C++ projects aswell as learning some low level maths. I feel this can add to my arsenal when it comes to gameplay programming as I understand the systems in which I work with everyday.
+
+There is also the use of memory to take into account using buffers and uniform variables. Both of the shaders are also made custom using GLSL. I also got hands on experience with using CMake which was a completely new venture for me. 
 
 
 
