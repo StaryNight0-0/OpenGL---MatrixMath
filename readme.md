@@ -24,8 +24,13 @@ Designed using NVIM and Linux , not fully tested on Windows.
 
 
 
-## Usage 🔧
-
+## Startup 🔧
+### Requirements
+- CMake 3.28+
+- C++ toolchain compatable with your SDL2 version
+- SDL2 (``` SDL2::SDL2``` )
+## Using the app
+### Instructions 
 1. Install from GitHub.
 2. Once installed, configure the file using the CMake lists available in the build. ```(Cmake ..)``` on Linux.
 3. SDL2 must be installed on your system for this to work appropiately ```(Sudo apt install libsdl2-dev)``` on Ubuntu.
