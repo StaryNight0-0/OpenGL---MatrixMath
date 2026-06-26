@@ -46,7 +46,7 @@ Designed using NVIM and Linux , not fully tested on Windows.
 ## Lessons Learned 🎓
 I decided to take on this project to learn some more lower level ideas when it comes to programming. I have taken a more  proactive approach to how I organise my C++ projects aswell as learning some low level maths. I feel this can add to my arsenal when it comes to gameplay programming as I understand the systems in which I work with everyday.
 
-There is also the use of memory to take into account using buffers and uniform variables. Both of the shaders are also made custom using GLSL. I also got hands on experience with using CMake which was a completely new venture for me. 
+There is also the use of memory to take into account using buffers and uniform variables. Both of the shaders are also made custom using GLSL. I also got hands on experience with using CMake which was a completely new venture for me. .
 
 
 
